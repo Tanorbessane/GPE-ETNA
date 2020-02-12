@@ -1,0 +1,182 @@
+﻿<UserControl x:Class="IHM.View.ListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IHM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="239" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <DockPanel HorizontalAlignment="Left" Height="760" LastChildFill="False" Grid.Row="1" VerticalAlignment="Top" Width="227" Grid.Column="0" Margin="10,0,0,0"  >
+            <Grid Grid.Row="1" Grid.Column="0" Width="226"  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="94" />
+                    <RowDefinition Height="130" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <!--Filtrer par Nom / Type-->
+                <TextBox  x:Name="Filter" Height="29"  Text="{Binding Nom}" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Margin="1,55,39,0"/>
+                <Button   Command="{Binding Recherche}" Grid.Row="0" Margin="187,55,0,10">
+                    <Image Source="/IMG/search.png"/>
+                </Button>
+                <Label x:Name="label" Content="Mots clés:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="80"/>
+
+                <!--Filtrer par période-->
+                <Label x:Name="label1" Content="Période:" HorizontalAlignment="Left" Margin="6,19,0,0" VerticalAlignment="Top" FontSize="16" Width="74" Height="0" Grid.Row="1"/>
+                <DatePicker SelectedDate="{Binding Date, StringFormat=MM/dd/yyyy}" HorizontalAlignment="Left" Name="RechercheDate" Margin="0,24,0,0" VerticalAlignment="Top" Width="226" FontSize="16" Cursor="Hand" Height="28" SelectedDateChanged="DatePicker_SelectedDateChanged" Grid.Row="1"/>
+                <DatePicker  SelectedDate="{Binding endDate, StringFormat=MM/dd/yyyy}" Name="RecherchePeriode" HorizontalAlignment="Left" Margin="0,71,0,0" VerticalAlignment="Top" Width="226" Height="28" SelectedDateChanged="Periode_SelectedDateChanged" Grid.Row="1"/>
+
+                <!--Filtrer par projet-->
+                <ListBox HorizontalAlignment="Left" Height="505" Margin="0,10,0,-446" Grid.Row="2" VerticalAlignment="Top" Width="216"  ItemsSource="{Binding LstProjet}" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <CheckBox Content="{Binding NomProject}"  IsChecked="{Binding IscheckedProject, Mode=TwoWay}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </DockPanel>
+
+        <Button  Name="BtnReload" HorizontalAlignment="Left" Margin="270,0,0,0" VerticalAlignment="Top" Width="57" Height="40" Command="{Binding ReloadDataGrid}"  BorderBrush="Transparent" Background="Transparent" Grid.Column="1">
+            <Image Source="/IMG/reload.png" Width="40"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Permet de recharger la grille de documents.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="331,0,0,0"  VerticalAlignment="Top" Width="57" Height="40" Command="{Binding Upload}"  BorderBrush="Transparent" Background="Transparent" Grid.Column="1">
+            <Image Source="/IMG/upload.png"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Permet d'importer un document.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="392,0,0,0" VerticalAlignment="Top" Width="57" Height="40" Command="{Binding Download}"  BorderBrush="Transparent" Background="Transparent" Grid.Column="1">
+            <Image Source="/IMG/download.png"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Permet de télécharger un document.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <!--<Button HorizontalAlignment="Left" Margin="453,0,0,0"  VerticalAlignment="Top" Width="57" Height="40" Command="{Binding CreateFolder}"  BorderBrush="Transparent" Background="Transparent" Grid.Column="1">
+            <Image Source="/IMG/add.png" Width="32"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Permet de creer un dossier.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>-->
+        <!--<Button Name="BtnEdit" HorizontalAlignment="Left" Margin="514,0,0,0"  VerticalAlignment="Top" Width="57" Height="40"  BorderBrush="Transparent" Background="Transparent" Grid.Column="1">
+            <Image Source="/IMG/edit.png" Width="31"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Permet de renommer un document.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>-->
+        <Button  HorizontalAlignment="Left" Margin="453,0,0,0"  VerticalAlignment="Top" Width="57" Height="40" Command="{Binding Supprimer}"  BorderBrush="Transparent" Background="Transparent" Grid.Column="1">
+            <Image Source="/IMG/trash.png" Height="30" Width="43"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Permet de supprimer un dossier / fichier.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button  HorizontalAlignment="Left" Margin="514,0,0,0"  VerticalAlignment="Top" Width="57" Height="40" Command="{Binding Open}"  BorderBrush="Transparent" Background="Transparent" Grid.Column="1">
+            <Image Source="/IMG/open.png" Height="24" Width="26"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Permet de visualiser un document.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <!--<Button Name="BtnProject" HorizontalAlignment="Left" Margin="636,0,0,0"  VerticalAlignment="Top" Width="57" Height="40" Command="{Binding PopinCommand}"  BorderBrush="Transparent" Background="Transparent" Grid.Column="1">
+            <Image Source="/IMG/link.png" Height="24" Width="26"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Permet de lier un document/dossier à un projet.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>-->
+
+        <TabControl Name="TabControl_Drive"  SelectedIndex="{Binding TabIndex}" Grid.Column="1" Margin="3,0,0,0" Grid.Row="1">
+            <TabItem Header="Google" Name="TabGoogle" Visibility="Hidden" >
+                <DataGrid  VerticalAlignment="Top"  ItemsSource="{Binding DgFiles_GG}" x:Name="DgFiles" AutoGenerateColumns="False"  SelectionMode="Single" SelectionUnit="FullRow" 
+                   SelectedItem="{Binding filesSelected}" Grid.Column="1" Grid.Row="1" Height="auto" BorderBrush="White" MouseDoubleClick="DgFiles_MouseDoubleClick"  SelectedCellsChanged="DataGrid_SelectedCellsChanged"  IsReadOnly="True" >
+                    <DataGrid.Columns >
+                        <DataGridTemplateColumn Header="" Width="50" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding IMG}" Width="20" Height="20" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" />
+                        <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
+                        <DataGridTextColumn Header="Taille" Binding="{Binding Taille}" Visibility="Hidden"/>
+                        <DataGridTextColumn Header="Date de création" Binding="{Binding DateDeCreation}" />
+                        <DataGridTextColumn Header="Modifié le" Binding="{Binding ModifieLe}" Visibility="Hidden"/>
+                        <DataGridTextColumn Header="Date d'invitation" Binding="{Binding DateInvitation}" />
+                        <DataGridTextColumn Header="Url de visualisation" Binding="{Binding PreviewUrl}" Visibility="Hidden" />
+                        <DataGridTextColumn Header="Path" Binding="{Binding Path}" Visibility="Hidden"/>
+                        <DataGridTextColumn Header="MimeType" Binding="{Binding MimeType}" Visibility="Hidden"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem >
+            <TabItem Header="Dropbox" Name="TabDropbox" Visibility="Hidden" >
+                <DataGrid  VerticalAlignment="Top"  ItemsSource="{Binding DgFiles_DP}" AutoGenerateColumns="False"  SelectionMode="Single" SelectionUnit="FullRow" 
+                   SelectedItem="{Binding filesSelected}" Grid.Column="1" Grid.Row="1" Height="auto" BorderBrush="White" MouseDoubleClick="DgFiles_MouseDoubleClick"  SelectedCellsChanged="DataGrid_SelectedCellsChanged" IsReadOnly="True" >
+                    <DataGrid.Columns >
+                        <DataGridTemplateColumn Header="" Width="50" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding IMG}" Width="20" Height="20" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" />
+                        <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
+                        <DataGridTextColumn Header="Taille" Binding="{Binding Taille}" Visibility="Hidden"/>
+                        <DataGridTextColumn Header="Date de création" Binding="{Binding DateDeCreation}" />
+                        <DataGridTextColumn Header="Modifié le" Binding="{Binding ModifieLe}" Visibility="Hidden"/>
+                        <DataGridTextColumn Header="Date d'invitation" Binding="{Binding DateInvitation}" />
+                        <DataGridTextColumn Header="Url de visualisation" Binding="{Binding PreviewUrl}" Visibility="Hidden" />
+                        <DataGridTextColumn Header="Path" Binding="{Binding Path}" Visibility="Hidden"/>
+                        <DataGridTextColumn Header="MimeType" Binding="{Binding MimeType}" Visibility="Hidden"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

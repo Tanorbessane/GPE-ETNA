@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="IHM.View.PersonalView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="800" Background="white">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Espace Personnalisé" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.692,3.715" Width="250" FontSize="24" Height="45" Margin="10,24,0,0"/>
+
+        <Image HorizontalAlignment="Left" Height="100" Margin="117,100,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Source="/IMG/user.png"/>
+        <Image HorizontalAlignment="Left" Height="40" Margin="90,240,0,0" Grid.Row="1" VerticalAlignment="Top" Width="27" Source="/IMG/dropbox.png"/>
+        <Image HorizontalAlignment="Left" Height="40" Margin="90,270,0,0" Grid.Row="1" VerticalAlignment="Top" Width="25" Source="/IMG/google.png"/>
+        <Button Content="{Binding strDP}" Grid.Row="1" HorizontalAlignment="Left" Margin="117,241,0,0" VerticalAlignment="Top" Width="123" Command="{Binding ConnecterDP}"  BorderBrush="White" Background="White"/>
+        <Button Content="{Binding strGG}" Grid.Row="1" HorizontalAlignment="Left" Margin="117,271,0,0" VerticalAlignment="Top" Width="123" Command="{Binding ConnecterGG}"  BorderBrush="White" Background="White"/>
+        
+        <Label Content="Login :" HorizontalAlignment="Left" Margin="399,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.692,3.715" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="449,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="272" Text="{Binding Login}" Grid.Row="1" IsReadOnly="True"/>
+
+        <Label Content="Email :" HorizontalAlignment="Left" Margin="399,165,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left" Height="21" Margin="449,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding Email}" Width="272" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.21"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+
+        <!--<Label Content="Mot de passe :" HorizontalAlignment="Left" Margin="351,221,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.546,3.653" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="449,221,0,0" TextWrapping="Wrap" Text="{Binding Mdp}" VerticalAlignment="Top" Width="272" Grid.Row="1" IsReadOnly="True"/>-->
+
+        <Label Content="Role :" HorizontalAlignment="Left" Margin="399,218,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.546,3.653" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="449,221,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="272" Text="{Binding Role}" IsReadOnly="True"/>
+
+        <Button Content="Enregistrer" HorizontalAlignment="Left" Margin="646,294,0,0" VerticalAlignment="Top" Width="75" Command="{Binding MiseAJourUser}" Grid.Row="1"/>
+
+    </Grid>
+</UserControl>

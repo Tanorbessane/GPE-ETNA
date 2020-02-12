@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="IHM.View.Gestion_Utilisateurs.UtilisateurView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="800" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+
+        <Label Content="•Gestion des utilisateurs " HorizontalAlignment="Left" Margin="42,38,0,0" VerticalAlignment="Top"/>
+        <Label Content="•Utilisateurs " HorizontalAlignment="Left" Margin="173,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.338,0.839"/>
+
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="100,0,0,0" Grid.Row="1" Grid.RowSpan="3" Source="{Binding ImgUser}"/>
+
+        <Label Content="Login :" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Margin="259,7,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23"  Grid.Row="1" TextWrapping="Wrap" Text="{Binding Utilisateur.Login}" VerticalAlignment="Top" Width="355" Margin="333,10,0,0"/>
+
+        <Label Content="Email :" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" RenderTransformOrigin="0.492,2.44" Margin="259,7,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Utilisateur.Email}" VerticalAlignment="Top" Width="355" Margin="333,10,0,0"/>
+
+        <Label Content="Role :" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Row="3" RenderTransformOrigin="0.492,2.44" Margin="259,7,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23"  Grid.Row="3" TextWrapping="Wrap" Text="{Binding Utilisateur.Role}" VerticalAlignment="Top" Width="355" Margin="333,7,0,0"/>
+
+        <Label Content="Projet :" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Row="4" RenderTransformOrigin="0.492,2.44" Margin="257,10,0,0"/>
+        <ListView ItemsSource="{Binding Utilisateur.LstProjet}" Grid.Row="4" Margin="150,20,112,21" Width="355" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="{Binding Nom}" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Label Content="Date de création :" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Row="5" RenderTransformOrigin="0.492,2.44" Margin="212,10,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Grid.Row="5" TextWrapping="Wrap" Text="{Binding DateDeCreation}" VerticalAlignment="Top" Width="355" Margin="333,10,0,0"/>
+
+        <Label Content="Fichiers Partagés :" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Row="6" RenderTransformOrigin="0.492,2.44" Margin="212,7,0,0" />
+        <ListView ItemsSource="{Binding Utilisateur.ListFiles}" Grid.Row="6" Margin="150,10,112,31" Width="355" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="{Binding Nom}" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Content="Modifier" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Top" Width="75" Margin="691,49,0,0" Command="{Binding ModifierUtilisateur}" />
+
+    </Grid>
+</UserControl>

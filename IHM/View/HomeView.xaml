@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="IHM.View.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IHM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000" >
+    <UserControl.Background>
+        <ImageBrush ImageSource="/IMG/background.jpg"/>
+    </UserControl.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="63" />
+            <RowDefinition Height="77" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--Menu-->
+        <Button Grid.Row="1" Grid.ColumnSpan="7" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="78" Command="{Binding PageHome}"  BorderBrush="Transparent"  Height="59" Background="Transparent">
+            <Image Source="/IMG/home.png"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Page d'accueil.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button  Grid.Row="1" Grid.ColumnSpan="7" HorizontalAlignment="Left" Margin="265,10,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="1.673,0.275" Command="{Binding PageAdmin}" BorderBrush="Transparent" Background="Transparent" Height="59">
+            <Image Source="/IMG/project.png"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Page des projets ....</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button  HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Width="78" Grid.Row="1" Grid.ColumnSpan="7" Height="59" BorderBrush="Transparent" Background="Transparent" Command="{Binding PagePerso}" >
+            <Image Source="/IMG/perso.png"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Espace perso</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button Name="BtnGestionUtilisateur"  HorizontalAlignment="Left" Margin="348,10,0,0" VerticalAlignment="Top" Width="78"  Height="59" BorderBrush="Transparent" Background="Transparent" Command="{Binding PageUser}" Grid.Row="1" Grid.ColumnSpan="7">
+            <Image Source="/IMG/GestionUtilisateur.png"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Gestion des utilisateurs.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button  HorizontalAlignment="Left" Margin="182,10,0,0" VerticalAlignment="Top" Width="78" Grid.Row="1" Grid.ColumnSpan="7" Height="59" BorderBrush="Transparent" Background="Transparent" Command="{Binding PageFichiers}" >
+            <Image Source="/IMG/GestionFichiers.png"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Gestion des fichiers.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button  Name="BtnGestionRoles" HorizontalAlignment="Left" Margin="430,10,0,0" VerticalAlignment="Top" Width="78" Height="59" BorderBrush="Transparent" Background="Transparent" Grid.Row="1" Grid.ColumnSpan="7" Command="{Binding PageRoles}" >
+            <Image Source="/IMG/role.png"/>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Gestion des roles.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        
+        <!--Row 2-->
+        <ContentControl Content="{Binding CurrentContentViewModel}" Grid.ColumnSpan="7"  Grid.Row="2" Width="auto"/>
+        <Button Content="Se déconnecter" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="104" Background="White" BorderBrush="Brown" Grid.Column="7"  Command="{Binding Disconnect}" Height="30"/>
+        <Label Content="GED ETNA" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="43" RenderTransformOrigin="-4.092,-0.5" FontSize="24" Width="152" FontFamily="Stencil" Foreground="#FFE6E1DC" />
+    </Grid>
+</UserControl>

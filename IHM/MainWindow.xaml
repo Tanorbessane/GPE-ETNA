@@ -1,0 +1,56 @@
+﻿<Window x:Class="IHM.MainWindow"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IHM.View"
+        xmlns:local1="clr-namespace:IHM.ModelView"
+        xmlns:local2="clr-namespace:IHM.View.Gestion_Utilisateurs"
+        xmlns:local3="clr-namespace:IHM.ModelView.Gestion_Utilisateurs"
+        xmlns:local4="clr-namespace:IHM.View.HomePage"
+        xmlns:local5="clr-namespace:IHM.ModelView.HomePage"
+        mc:Ignorable="d"
+        Title="" Height="800" Width="1000"  ResizeMode="CanResize" Background="White">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type local1:ListModelView}">
+            <local:ListView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local1:HomeModelView}">
+            <local:HomeView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local1:RegisterViewModel}">
+            <local:RegisterView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local1:LoginModelView}">
+            <local:LoginView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local1:AdminModelView}">
+            <local:AdminView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local1:UpdateProjectModelView}">
+            <local:AddProjectView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local1:AddProjectModelView}">
+            <local:AddProjectView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local1:PersonalModelView}">
+            <local:PersonalView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local1:ListUsersModelView}">
+            <local:ListUsersView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local1:RolesModelView}">
+            <local:RolesView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local3:UtilisateurViewModel}">
+            <local2:UtilisateurView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local5:HomePageModelView}">
+            <local4:HomePageView />
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>         
+        <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="2" Grid.ColumnSpan="2" Width="auto"/>
+    </Grid>
+</Window>

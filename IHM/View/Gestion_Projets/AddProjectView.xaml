@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="IHM.View.AddProjectView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IHM.View"
+             xmlns:ff="clr-namespace:IHM.Helpers"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="330" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Content="{Binding TitrePage}" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.692,3.715" Width="230" FontSize="24" Height="45" Margin="3,10,0,0"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Margin="159,0,0,-51">Nom :</Label>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="24,0,0,-12" Grid.Row="1" TextWrapping="Wrap" Text="{Binding NomProjet}" VerticalAlignment="Top" Width="563"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Margin="159,50,0,-126" Content="Description :"/>
+        <TextBox Grid.Column="1" AcceptsReturn="True" Margin="24,54,65,-151" Text="{Binding DescriptionProjet, UpdateSourceTrigger=PropertyChanged}" MaxHeight="100" TextWrapping="Wrap" Grid.RowSpan="2"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Margin="159,207,0,-307" Content="Team :"/>
+        <ListBox Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="24,207,0,-332" Grid.Row="1" VerticalAlignment="Top" Width="563" Grid.RowSpan="2" ItemsSource="{Binding LstUser}" SelectionMode="Extended"
+                 ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedUsers}">
+        </ListBox>
+
+        <Label Grid.Row="1" Grid.Column="0" Margin="159,310,0,-307" Content="Fichiers :"/>
+        <ListBox Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="24,317,0,-332" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2" Width="563" ItemsSource="{Binding LstFiles}" SelectionMode="Extended"
+                 ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedFiles}">
+        </ListBox>
+
+        <Button Content="Enregistrer" Command="{Binding Save}" Grid.Column="1" Margin="373,381,65,-445" Grid.Row="1" Width="150" Height="40"/>
+
+    </Grid>
+</UserControl>

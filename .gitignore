@@ -1,0 +1,9 @@
+
+IHM/App.config
+IHM/bin/*
+IHM/obj/*
+.vs/*
+
+IHM/projets.json
+IHM/App.config
+*.json
