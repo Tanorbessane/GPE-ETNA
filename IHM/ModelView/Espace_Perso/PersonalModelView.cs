@@ -23,19 +23,14 @@ namespace IHM.ModelView
         public ICommand MiseAJourUser { get; set; }
 
         private Utilisateur u;
+        private DropBox DBB = Singleton.GetInstance().GetDBB();
         private string strAccessToken = string.Empty;
         private string strAuthenticationURL = string.Empty;
-
-        //
-        private DriveBase driveBaseGoogle;
-        private DriveBase driveBaseDropbox;
+        private Cloud cloud = Singleton.GetInstance().GetCloud();
 
         public PersonalModelView()
         {
-            driveBaseGoogle = new GoogleCloud();           
             u = Singleton.GetInstance().GetUtilisateur();
-            driveBaseDropbox = new DropBoxCloud();
-
             Login = u.Login;
             Mdp = u.MDP;
             Email = u.Email;
@@ -49,9 +44,9 @@ namespace IHM.ModelView
         /// </summary>
         private void LoadDrive()
         {
-            if (u.CrededentielCloudRailDropbox != null)
+            if (u.Token_DP != null)
                 strDP = "Dropbox connecté";
-            if (u.CrededentielCloudRailGoogle != null)
+            if (u.Token_GG != null)
                 strGG = "Google connecté";
         }
 
@@ -157,13 +152,34 @@ namespace IHM.ModelView
         /// <param name="parameter"></param>
         private void ActionConnecterDropbox(object parameter)
         {
-            string credential = driveBaseGoogle.Connect();
-            u.CrededentielCloudRailDropbox = credential;
-            UpdateUtilisateur();
-            Singleton.GetInstance().GetListModelView().DgFiles_DP = driveBaseDropbox.GetItems();
-
-            strGG = "Dropbox connecté";
-            MessageBox.Show("Dropbox connecté");
+            if (u.Token_DP == null)
+            {
+                try
+                {
+                    if (string.IsNullOrEmpty(Constant.strAppKey))
+                    {
+                        MessageBox.Show("Rentrer l'API Clé inclus dans le APP.Config");
+                        return;
+                    }
+                    if (DBB != null)
+                    {
+                        strAuthenticationURL = DBB.GeneratedAuthenticationURL();
+                        strAccessToken = DBB.GenerateAccessToken();
+                        var uUpdate = Singleton.GetInstance().GetAllUtilisateur().FirstOrDefault(user => u.Equals(user));
+                        if (uUpdate != null)
+                        {
+                            uUpdate.Token_DP = strAccessToken; 
+                        }
+                        UpdateUtilisateur();
+                        strDP = "Dropbox connecté";
+                        MessageBox.Show("Dropbox connecté");
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Impossible d'autoriser l'application à se connecter à l'application");
+                }
+            }
         }
 
         /**
@@ -171,6 +187,12 @@ namespace IHM.ModelView
          * */
         private void UpdateUtilisateur()
         {
+            //StreamWriter file;
+            //using (file = File.CreateText(@ConfigurationSettings.AppSettings["UtilisateurJSON"]))
+            //{
+            //    JsonSerializer serializer = new JsonSerializer();
+            //    serializer.Serialize(file, Singleton.GetInstance().GetAllUtilisateur());
+            //}
             Functions.CreateFileUtilisateur();
         }
 
@@ -186,11 +208,7 @@ namespace IHM.ModelView
         {
             try
             {
-                string credential =  driveBaseGoogle.Connect();
-                u.CrededentielCloudRailGoogle = credential;
-                UpdateUtilisateur();
-                Singleton.GetInstance().setListFilesView(new ListModelView(driveBaseDropbox, driveBaseGoogle));
-
+                Singleton.GetInstance().GetGoogle().Connect();
                 strGG = "Google connecté";
                 MessageBox.Show("Google connecté");
             }

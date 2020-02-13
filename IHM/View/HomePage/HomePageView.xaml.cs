@@ -29,9 +29,9 @@ namespace IHM.View.HomePage
         {
             InitializeComponent();
 
-            if (Singleton.GetInstance().GetHomeModelView().driveBaseDropbox != null)
+            if (Singleton.GetInstance().GetDBB().DBClient != null)
             {
-                long espace_utilise_long = Singleton.GetInstance().GetHomeModelView().driveBaseDropbox.espace_utilise;
+                long espace_utilise_long = Singleton.GetInstance().GetDBB().espace_utilise;
 
                 double espace_utilise_Megabyte = ConvertBytesToMegabytes(espace_utilise_long);
                 double espace_utilise_Gegabyte = ConvertMegabytesToGigabytes(espace_utilise_Megabyte);

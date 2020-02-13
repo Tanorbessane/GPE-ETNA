@@ -148,7 +148,7 @@ namespace IHM.ModelView
             foreach (Fichier f in p.LstFiles) {
                 if (f.IdDropbox != null) {
                     foreach (Utilisateur u in p.LstUser) {
-                        Singleton.GetInstance().GetHomeModelView().driveBaseDropbox.SharingFile(f, u);
+                        Singleton.GetInstance().GetDBB().SharingFile(f, u);
                      }
                 }
                 else
@@ -166,7 +166,7 @@ namespace IHM.ModelView
         private void LoadFiles()
         {
             List<string> lst_file_gg = Singleton.GetInstance().GetListModelView().DgFiles_GG.Select(f => f.Nom).ToList();
-            List<string> lst_file_dp = Singleton.GetInstance().GetListModelView().DgFiles_DP.Select(f => f.Nom).ToList();
+            List<string> lst_file_dp = Singleton.GetInstance().GetListModelView().DgFiles_DP.Where(f =>f.IsFile).Select(f => f.Nom).ToList();
             List<string> rslt = new List<string>();
             rslt.AddRange(lst_file_dp);
             rslt.AddRange(lst_file_gg);

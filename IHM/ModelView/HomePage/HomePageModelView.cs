@@ -14,15 +14,11 @@ namespace IHM.ModelView.HomePage
 {
     public class HomePageModelView : ObservableObject, IPageViewModel
     {
-        private DriveBase driveBaseDropbox;
-        private DriveBase driveBaseGoogle;
+        public string Name => "";
 
-        public HomePageModelView(DriveBase _driveBaseDropbox, DriveBase _driveBaseGoogle)
+        public HomePageModelView()
         {
-            driveBaseDropbox = _driveBaseDropbox;
-            driveBaseGoogle = _driveBaseGoogle;
-            if (driveBaseDropbox != null)
-                driveBaseDropbox.getSpace();            
+            Singleton.GetInstance().GetDBB().getSpace();            
         }
 
         public void LoadAction()

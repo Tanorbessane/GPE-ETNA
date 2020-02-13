@@ -22,14 +22,12 @@ namespace IHM.ModelView
         public ICommand AddProject { get; set; }
         public ICommand ModifierProjet { get; set; }
         public ICommand SupprimerProjet { get; set; }
-        Utilisateur cUtilisateur = null;
 
         #region [Constructor]
         public AdminModelView()
         {           
             LoadProject();
             LoadAction();
-            cUtilisateur = Singleton.GetInstance().GetUtilisateur();
         }
 
         private void LoadProject()
@@ -38,9 +36,6 @@ namespace IHM.ModelView
                 LstProject.Clear();
 
              List<Projet> lstProject = Singleton.GetInstance().GetAllProject();
-
-            //recuperation des projets qui inclus l'utilisateur actif
-            lstProject.Where(p => p.LstUser.Contains(cUtilisateur)).ToList();
 
             if (Singleton.GetInstance().GetUtilisateur().Role != "Chef de projet")
             {

@@ -43,7 +43,7 @@ namespace IHM.ModelView
         {
             if (Nouveau_dossier != null)
             {
-               // Singleton.GetInstance().GetDBB().CreateFolder(Nouveau_dossier);
+                Singleton.GetInstance().GetDBB().CreateFolder(Nouveau_dossier);
                 app.Close();
             }
         }

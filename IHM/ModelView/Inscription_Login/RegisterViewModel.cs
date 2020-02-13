@@ -114,6 +114,9 @@ namespace IHM.ModelView
                         Nouvelle_Utilisateur.Login = Login;
                         Nouvelle_Utilisateur.MDP = Mdp;
                         Nouvelle_Utilisateur.Email = Email;
+                        Nouvelle_Utilisateur.Token_DP = null;
+                        Nouvelle_Utilisateur.Token_GG = null;
+                        Nouvelle_Utilisateur.RefreshToken = null;
                         Nouvelle_Utilisateur.Role = Role;
                         Singleton.GetInstance().addUtilisateur(Nouvelle_Utilisateur);
 
@@ -157,6 +160,7 @@ namespace IHM.ModelView
             List<string> lst = new List<string>();
             lst.Add("Sélectionnez un rôle...");
             lst.Add("Secrétaire");
+            lst.Add("Developpeur");
             lst.Add("Chef de projet");
             lst.Add("Gestionnaire de cloud");
             return lst;

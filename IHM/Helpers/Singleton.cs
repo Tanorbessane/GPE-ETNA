@@ -24,6 +24,9 @@ namespace IHM.Helpers
         List<Utilisateur> lstUtilisateur = new List<Utilisateur>();
         List<Projet> lstProject = new List<Projet>();
         List<Roles> lstRoles = new List<Roles>();
+        DropBox DBB = new DropBox(ConfigurationSettings.AppSettings["strAppKey"], "PTM_Centralized");
+        GoogleCloud google  = new GoogleCloud();
+        Cloud cloud;
         MainModelView cMain;
         HomeModelView cContent;
         Utilisateur cUtilisateur;
@@ -108,7 +111,39 @@ namespace IHM.Helpers
             lstUtilisateur.Clear();
             lstUtilisateur = lstu;
         }
-              
+
+        /********/
+
+        public void SetDBB(DropBox _DBB)
+        {
+            DBB = _DBB;
+        }
+        public DropBox GetDBB()
+        {
+            return DBB;
+        }
+
+        /************/
+
+        public void SetCloud(Cloud _cloud)
+        {
+            cloud = _cloud;
+        }
+        public Cloud GetCloud()
+        {
+            return cloud;
+        }
+
+        /************/
+        public void SetGoogle(GoogleCloud _google)
+        {
+            google = _google;
+        }
+        public GoogleCloud GetGoogle()
+        {
+            return google;
+        }
+
         /********/
 
         public void addProject(Projet p)

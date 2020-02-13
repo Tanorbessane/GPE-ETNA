@@ -1,4 +1,10 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace IHM.Helpers
 {
     class Constant
@@ -10,8 +16,5 @@ namespace IHM.Helpers
         public static string strAppSecretGoogle = System.IO.Path.GetTempPath() + "DriveServiceCredentials.json";
         public static string strAppKey = "wvay6mx0i0a2gbo";
         public static string strAppSecret = "1qgfe6zpe62mqp3";
-        public static string LicenceCloudRail = "5c643dfb21b62e522833cf76";
-        public static string GoogleKey = "654071449191-danfhp839mq0ivi7a0ddkm4oo0g9o5ju.apps.googleusercontent.com";
-        public static string GooGleSecret = "JZ_Pi9D4--QS2jZ8SfnTxBWW";
-    }
+     }
 }
